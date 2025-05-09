@@ -1,6 +1,6 @@
 // common.js
 
-const GOOGLE_CLIENT_ID = "Y368690369318-8ck0l2dtkdusm85to4aifiboovkhpqcu.apps.googleusercontent.com"; // <-- REPLACE THIS
+const GOOGLE_CLIENT_ID = "368690369318-8ck0l2dtkdusm85to4aifiboovkhpqcu.apps.googleusercontent.com"; // <-- REPLACE THIS
 const ID_TOKEN_KEY = 'googleIdToken';
 const LOGGED_IN_USERS_KEY = 'loggedInUserIds';
 const USER_ACTIVITY_KEY = 'userActivityLog';
