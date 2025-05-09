@@ -3,47 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sign-In Demo</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Login - My App</title>
+    <link rel="stylesheet" href="style.css">
     <!-- Google Identity Services Library -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
+    <header>
+        <h1>Welcome to My App</h1>
+    </header>
+    <!-- No nav or user bar on login page -->
     <div class="container">
-        <h1>My Simple App</h1>
-
+        <h2>Please Sign In</h2>
+        <p class="text-muted">Use your Google Account to continue.</p>
         <!-- This div will be used by Google to render the sign-in button -->
-        <div id="g_id_onload"
-             data-client_id="368690369318-8ck0l2dtkdusm85to4aifiboovkhpqcu.apps.googleusercontent.com"
-             data-callback="handleCredentialResponse"
-             data-auto_prompt="false">
-             <!--
-                YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com: Replace with your actual Client ID
-                data-callback: Function to call after successful sign-in
-                data-auto_prompt: Set to false to not show the One Tap prompt automatically
-             -->
-        </div>
-
-        <!-- This is the standard Google Sign-In button rendering -->
-        <div class="g_id_signin"
-             data-type="standard"
-             data-size="large"
-             data-theme="outline"
-             data-text="sign_in_with"
-             data-shape="rectangular"
-             data-logo_alignment="left">
-        </div>
-
-        <div id="userInfo" class="user-info" style="display:none;">
-            <h2>Welcome!</h2>
-            <img id="userPicture" src="" alt="User Picture" style="width: 75px; height: 75px; border-radius: 50%;">
-            <p>Name: <span id="userName"></span></p>
-            <p>Email: <span id="userEmail"></span></p>
-            <button id="signOutButton">Sign Out</button>
-        </div>
+        <div id="g_id_signin"></div>
+        <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
+            Login to access your personalized dashboard and profile information.
+        </p>
     </div>
-
-    <!-- For decoding JWT (ID Token) - you can also use a library -->
-    <script src="index.js"></script>
+    <script src="common.js"></script>
 </body>
 </html>

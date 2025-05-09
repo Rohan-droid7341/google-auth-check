@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - My App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <header>
+        <h1>My App</h1>
+    </header>
+
+    <div class="user-info-bar">
+        <img id="userPictureSmall" src="" alt="" style="display:none;">
+        <span id="userNameSmall">Loading...</span>
+        <button id="signOutButton">Sign Out</button>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="admin.html">Admin Stats</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Your Profile</h2>
+        <div id="userInfoDetails">
+            <img id="userPicture" src="" alt="User Picture" style="display:none;">
+            <p><strong>Name:</strong> <span id="userName"></span></p>
+            <p><strong>Email:</strong> <span id="userEmail"></span></p>
+            <!-- You could add more details here if available from the token or a People API call -->
+        </div>
+        <p class="text-muted" style="margin-top:15px;">This information is retrieved from your Google Account.</p>
+    </div>
+
+    <script src="common.js"></script>
+</body>
+</html>

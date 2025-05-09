@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - My App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <header>
+        <h1>My App</h1>
+    </header>
+
+    <div class="user-info-bar">
+        <img id="userPictureSmall" src="" alt="" style="display:none;">
+        <span id="userNameSmall">Loading...</span>
+        <button id="signOutButton">Sign Out</button>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="admin.html">Admin Stats</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Dashboard</h2>
+        <p>Welcome to your dashboard, <strong id="userName"></strong>!</p>
+        <p>This is a protected area. You can only see this if you are logged in.</p>
+        <p>Here you might see an overview of your recent activity or important notices.</p>
+        <p style="margin-top: 20px;">
+            <a href="profile.html" class="button-like">View My Profile</a>
+        </p>
+    </div>
+
+    <script src="common.js"></script>
+</body>
+</html>

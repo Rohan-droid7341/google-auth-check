@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Stats - My App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <header>
+        <h1>My App</h1>
+    </header>
+
+    <div class="user-info-bar">
+        <img id="userPictureSmall" src="" alt="" style="display:none;">
+        <span id="userNameSmall">Loading...</span>
+        <button id="signOutButton">Sign Out</button>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="admin.html">Admin Stats</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Admin Statistics</h2>
+        <p>Total Unique User Logins (this browser session): <strong id="uniqueLoginCount">0</strong></p>
+        <p class="text-muted">Note: These stats are based on data stored in this browser's localStorage and will reset if cleared or on a different browser/device.</p>
+
+        <h3 style="margin-top: 30px;">Recent User Activity (Last 100 entries):</h3>
+        <table id="activityTable">
+            <thead>
+                <tr>
+                    <th>User ID (Sub)</th>
+                    <th>Action</th>
+                    <th>Page</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="4">Loading activity...</td></tr>
+            </tbody>
+        </table>
+        <button id="clearActivityButton">Clear Activity Log & Unique Users (for testing)</button>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        // Page-specific script for admin.html
+        function initializeAdminPageData(loggedInUser) {
+            if (!loggedInUser) {
+                // Should have been redirected by common.js, but as a safeguard
+                console.warn("Admin page loaded without a logged-in user. Data may not be accurate.");
+                document.getElementById('uniqueLoginCount').innerText = 'N/A (Not Logged In)';
+                document.getElementById('activityTable').getElementsByTagName('tbody')[0].innerHTML = '<tr><td colspan="4">Cannot load activity. Please log in.</td></tr>';
+                return;
+            }
+
+            const count = getUniqueLoginCount();
+            document.getElementById('uniqueLoginCount').innerText = count;
+
+            const activities = getUserActivity();
+            const tableBody = document.getElementById('activityTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Clear "Loading..." or existing rows
+
+            if (activities.length === 0) {
+                const row = tableBody.insertRow();
+                const cell = row.insertCell();
+                cell.colSpan = 4;
+                cell.textContent = 'No activity recorded yet.';
+                cell.style.textAlign = 'center';
+            } else {
+                activities.slice().reverse().forEach(activity => { // Show newest first (make a copy with slice before reverse)
+                    const row = tableBody.insertRow();
+                    const userIdCell = row.insertCell();
+                    userIdCell.textContent = activity.userId ? activity.userId.substring(0, 15) + '...' : 'Unknown User';
+                    userIdCell.title = activity.userId || 'Unknown User'; // Show full ID on hover
+
+                    row.insertCell().textContent = activity.action;
+                    row.insertCell().textContent = activity.page;
+                    row.insertCell().textContent = new Date(activity.timestamp).toLocaleString();
+                });
+            }
+
+
+            const clearButton = document.getElementById('clearActivityButton');
+            if (clearButton) {
+                clearButton.addEventListener('click', () => {
+                    if (confirm("Are you sure you want to clear all activity logs and unique user IDs from this browser's storage? This is for testing purposes.")) {
+                        localStorage.removeItem(USER_ACTIVITY_KEY);
+                        localStorage.removeItem(LOGGED_IN_USERS_KEY);
+                        alert("Logs and user IDs cleared. Refresh the page to see changes.");
+                        // Refresh data on page immediately
+                        initializeAdminPageData(loggedInUser); // Re-initialize with current (now empty) data
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
